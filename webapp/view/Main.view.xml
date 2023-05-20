@@ -1,11 +1,96 @@
-<mvc:View controllerName="com.sap.salesoderlist.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns:fb="sap.ui.comp.filterbar"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+<mvc:View controllerName="com.sap.salesoderlist.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" xmlns="sap.m">
+    <Page id="page" title="{i18n&gt;title}">
         <content>
-        <Button text="searchbutton"></Button>
+            <l:VerticalLayout width="auto">
+                <fb:FilterBar id="filterBar" header="Header" reset="onReset" search="onSearch" clear="onClear" cancel="onCancel" filtersDialogClosed="onFiltersDialogClosed" showRestoreButton="true" showClearButton="true" showCancelButton="true">
+                    <fb:filterGroupItems>
+                        <!-- Sales Oder  -->
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="Sales Order ID" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        <!--  Customer  -->
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="Customer ID" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        <!-- Customer Name  -->
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="C" label="Customer Name" labelTooltip="Customer Name " mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
 
+                        <!--  Group ID -->
+                        <fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="A" label="CurrencyCode" labelTooltip="Tooltip GroupItem Example">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="B" label="GrossAmount">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="A2" label="NetAmount" labelTooltip="Tooltip GroupItem Example">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="B2" label="DeliveryStatusDescription">
+                            <fb:control>
+                                <Input type="Text" change="onChange"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+                <!-- sap.m Table  -->
+                <Table id="idProductsTable" inset="false" items="{
+						path: &apos;/ProductCollection&apos;,
+						sorter: {
+							path: &apos;Name&apos;
+						}
+					}">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Sales Oder list report " level="H2"/>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://download" press="onDataExport"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="salesOrderID"  hAlign="Initial" width="12em">
+                            <Text text="SalesOrder ID"/>
+                        </Column>
+                        <Column id="CustomerId" minScreenWidth="Tablet" hAlign="Center" demandPopin="true">
+                            <Text text="Customer ID"/>
+                        </Column>
+                        <Column id="BillingStatusId" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                            <Text text="Billing Status"/>
+                        </Column>
+                        <Column id="DevliveryStatusId" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                            <Text text="Delivery Status"/>
+                        </Column>
+                        <Column id="CustomerNameID" hAlign="End">
+                            <Text text="Customer Name"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <ObjectIdentifier title="{Name}" text="{ProductId}"/>
+                                <Text text="{SupplierName}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </l:VerticalLayout>
         </content>
     </Page>
 </mvc:View>
