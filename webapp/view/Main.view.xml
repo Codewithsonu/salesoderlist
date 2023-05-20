@@ -1,0 +1,11 @@
+<mvc:View controllerName="com.sap.salesoderlist.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+        <Button text="searchbutton"></Button>
+
+        </content>
+    </Page>
+</mvc:View>
